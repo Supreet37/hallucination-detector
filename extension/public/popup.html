@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hallucination Detector</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      font-family: 'Inter', sans-serif;
+      background: #f0f7ff;
+      padding: 20px;
+      transition: background 0.4s ease;
+    }
+
+    /* Color themes per result */
+    body.safe     { background: #f0fdf4; }
+    body.suspicious { background: #fefce8; }
+    body.hallucinated { background: #fff0f6; }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #93c5fd;
+      transition: background 0.4s;
+    }
+    body.safe .dot         { background: #86efac; }
+    body.suspicious .dot   { background: #fde68a; }
+    body.hallucinated .dot { background: #f9a8d4; }
+
+    h1 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      letter-spacing: 0.01em;
+    }
+
+    /* Result area */
+    .result-area {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border: 1.5px solid #e0f2fe;
+      transition: border-color 0.4s;
+    }
+    body.safe .result-area         { border-color: #bbf7d0; }
+    body.suspicious .result-area   { border-color: #fef08a; }
+    body.hallucinated .result-area { border-color: #fbcfe8; }
+
+    #status {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    #result-box { display: none; width: 100%; }
+
+    .result-emoji { font-size: 28px; margin-bottom: 6px; }
+
+    .result-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .result-score {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+
+    /* Bar */
+    #preview {
+      font-size: 11px;
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 8px;
+      line-height: 1.5;
+      text-align: left;
+      width: 100%;
+    }
+
+    .bar-bg {
+      width: 100%;
+      height: 5px;
+      background: #f1f5f9;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    #bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.6s ease, background 0.4s;
+    }
+    body.safe .bar-bg #bar         { background: #4ade80; }
+    body.suspicious .bar-bg #bar   { background: #facc15; }
+    body.hallucinated .bar-bg #bar { background: #f472b6; }
+
+    /* Button */
+    #analyze-btn {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 10px;
+      background: #bfdbfe;
+      color: #1e40af;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    #analyze-btn:hover:not(:disabled) { background: #93c5fd; }
+    #analyze-btn:active:not(:disabled) { transform: scale(0.98); }
+    #analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    body.safe .result-label         { color: #15803d; }
+    body.suspicious .result-label   { color: #a16207; }
+    body.hallucinated .result-label { color: #be185d; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="dot"></div>
+    <h1>Hallucination Detector</h1>
+  </div>
+
+  <div class="result-area">
+    <div id="status">Click Analyze to check the latest AI response.</div>
+    <div id="result-box">
+      <div class="result-emoji" id="emoji"></div>
+      <div class="result-label" id="label"></div>
+      <div class="result-score" id="score"></div>
+      <div class="bar-bg"><div id="bar"></div></div>
+      <div id="preview"></div>
+    </div>
+  </div>
+
+  <button id="analyze-btn">Analyze</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

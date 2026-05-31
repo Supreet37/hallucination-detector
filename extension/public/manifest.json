@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "AI Hallucination Detector",
+  "version": "1.0.0",
+  "description": "Detects hallucinations in AI-generated text from ChatGPT, Gemini, and Claude.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Hallucination Detector"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://gemini.google.com/*",
+        "https://claude.ai/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

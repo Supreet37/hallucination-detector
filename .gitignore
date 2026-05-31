@@ -1,0 +1,38 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+
+# Dependency files
+*.egg-info/
+*.eggs/
+*.manifest
+
+# Node.js / frontend build artifacts
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# VS Code settings
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# SQLite databases (if generated locally)
+*.sqlite3
+
+# Extension packaging artifacts
+*.zip
+*.crx
+
+# Misc
+*.tmp

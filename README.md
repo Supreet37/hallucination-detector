@@ -88,3 +88,11 @@ User clicks Analyze
 
 Uses `vectara/hallucination_evaluation_model` from HuggingFace.
 No training required — pre-trained and production-ready.
+
+## Demo
+ 
+| Safe Response | Suspicious Response |
+|---|---|
+| ![Safe](demo1) | ![Suspicious](demo2) |
+ 
+---
